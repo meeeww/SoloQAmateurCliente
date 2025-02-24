@@ -156,7 +156,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
                 <motion.tr
                   key={player.id}
                   layout // Hace que el elemento se anime al cambiar de posición
-                  transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                  transition={{ type: "spring", damping: 20, stiffness: 150 }}
                   className="border-b border-gray-700"
                 >
                   <td className="p-3 border-b border-r border-gray-300">{player.positionTable}</td>
