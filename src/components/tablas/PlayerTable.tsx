@@ -174,7 +174,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
                     <td className={`p-3 border-b border-gray-300 font-bold ${player.winRate > 50 ? "text-verde" : "text-rojo"}`}>{player.winRate}</td>
                     <td className="p-3 border-b border-gray-300">
                       <div className="flex items-center gap-2 font-bold">
-                        <img src={`https://api.koryubudoficial/assets/rankIcons/${player.tier}.png`} className="w-12 h-9" />
+                        <img src={`https://api.koryubudoficial.es/assets/rankIcons/${player.tier}.png`} className="w-12 h-9" />
                         {capitalizeFirstLetter(player.tier)} {checkHighElo(player.tier, player.rank)}
                         <span className="font-medium">({player.leaguePoints}LPs)</span>
                       </div>
