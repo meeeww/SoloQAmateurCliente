@@ -14,3 +14,14 @@ body {
   --tw-text-opacity: 1;
   color: rgb(76 175 80 / var(--tw-text-opacity));
 }
+
+/* Para todos los navegadores */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer y Edge */
+}
+
+/* Para WebKit (Chrome, Safari, Edge basado en Chromium) */
+*::-webkit-scrollbar {
+  display: none;
+}
