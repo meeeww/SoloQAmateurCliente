@@ -19,8 +19,11 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
     { key: "partidas", direction: "asc" },
   ]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchTeam, setSearchTeam] = useState("");
 
-  const filteredPlayers = players.filter((player) => player.username.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredPlayers = players.filter(
+    (player) => player.username.toLowerCase().includes(searchTerm.toLowerCase()) && player.teamName.toLowerCase().includes(searchTeam.toLowerCase())
+  );
 
   const sortedPlayers = [...filteredPlayers].sort((a, b) => {
     for (const { key, direction } of sortConfig) {
@@ -104,6 +107,13 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
             placeholder="Buscar jugadores..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            className="mb-4 p-3 rounded-lg bg-[#1f1f1f] text-white placeholder-gray-400 w-full focus:outline-none focus:ring-2 focus:ring-[#4a4a4a]"
+          />
+          <input
+            type="text"
+            placeholder="Buscar por equipo"
+            value={searchTeam}
+            onChange={(e) => setSearchTeam(e.target.value)}
             className="mb-4 p-3 rounded-lg bg-[#1f1f1f] text-white placeholder-gray-400 w-full focus:outline-none focus:ring-2 focus:ring-[#4a4a4a]"
           />
         </div>
