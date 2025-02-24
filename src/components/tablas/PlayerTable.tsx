@@ -181,7 +181,10 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
                     </div>
                   </td>
                   <td className="p-3 text-rojo border-b border-gray-300">
-                    <img src={`https://api.koryubudoficial.es/assets/teamIcons/${player.teamName}.png`} className="w-10 h-10" />
+                    <div className="flex items-center gap-2 font-bold">
+                      <img src={`https://api.koryubudoficial.es/assets/teamIcons/${player.teamName}.png`} className="w-10 h-10" />
+                      <span className="font-medium">{player.teamName}</span>
+                    </div>
                   </td>
                 </motion.tr>
               ))}
