@@ -10,7 +10,7 @@ export default function Welcome() {
 
   useEffect(() => {
     // Conectar al servidor
-    socket = io("http://localhost:3502");
+    socket = io("https://api.koryubudoficial.es");
 
     // Escuchar por mensajes
     socket.on("playerList", (data: any) => {
