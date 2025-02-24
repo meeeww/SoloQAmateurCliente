@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+body {
+  font: 400 16px "Inter", sans-serif;
+}
+
+.text-rojo {
+  --tw-text-opacity: 1;
+  color: rgb(229 57 53 / var(--tw-text-opacity));
+}
+
+.text-verde {
+  --tw-text-opacity: 1;
+  color: rgb(76 175 80 / var(--tw-text-opacity));
+}

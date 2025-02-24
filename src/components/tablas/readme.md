@@ -1,0 +1,1 @@
+{/* https://valorant.fandom.com/wiki/Category:Rank_Images o https://drive.google.com/file/d/1Q_p-OicBmGkP1Xt-h-vdi8ylBifs09wj/view */}
