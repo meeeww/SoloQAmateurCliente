@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Player } from "@/interfaces/PlayerInterface";
 import UserBubble from "./components/userBubble";
 import UserRRSS from "./components/userRRSS";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface PlayerTableProps {
   players: Player[];
@@ -68,12 +68,16 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
       <div key={`${key}-${isActive ? sortConfig[0]?.direction : "none"}`} className="flex flex-col text-xs">
         <img
           src="/caret-up-solid.svg"
-          className={`h-3 w-4 invert-[100%] brightness-200 transition-opacity duration-200 ${isActive && sortConfig[0]?.direction === "desc" ? "opacity-100" : "opacity-50"}`}
+          className={`h-3 w-4 invert-[100%] brightness-200 transition-opacity duration-200 ${
+            isActive && sortConfig[0]?.direction === "desc" ? "opacity-100" : "opacity-50"
+          }`}
           alt=""
         />
         <img
           src="/caret-down-solid.svg"
-          className={`h-3 w-4 invert-[100%] brightness-200 transition-opacity duration-200 ${isActive && sortConfig[0]?.direction === "asc" ? "opacity-100" : "opacity-50"}`}
+          className={`h-3 w-4 invert-[100%] brightness-200 transition-opacity duration-200 ${
+            isActive && sortConfig[0]?.direction === "asc" ? "opacity-100" : "opacity-50"
+          }`}
           alt=""
         />
       </div>
@@ -148,43 +152,39 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
               </tr>
             </thead>
             <tbody>
-              <AnimatePresence>
-                {sortedPlayers.map((player) => (
-                  <motion.tr
-                    key={player.id} // Esto ayuda a React a identificar los elementos para animaciones
-                    initial={{ opacity: 0, y: 20 }} // Animación inicial (cuando entra el jugador)
-                    animate={{ opacity: 1, y: 0 }} // Animación cuando el jugador se anima en la tabla
-                    exit={{ opacity: 0, y: -20 }} // Animación cuando el jugador se va de la tabla (salida)
-                    transition={{ duration: 0.3 }} // Duración de las animaciones
-                    className="border-b border-gray-700"
-                  >
-                    <td className="p-3 border-b border-r border-gray-300">{player.positionTable}</td>
-                    <td className="p-3 border-b border-gray-300">
-                      <UserBubble player={player} />
-                    </td>
-                    <td className="p-3 border-b border-gray-300">
-                      <UserRRSS player={player} type="twitter" />
-                    </td>
-                    <td className="p-3 border-b border-r border-gray-300">
-                      <UserRRSS player={player} type="twitch" />
-                    </td>
-                    <td className="p-3 border-b border-gray-300">{player.partidas}</td>
-                    <td className="p-3 text-verde border-b border-gray-300">{player.victorias}</td>
-                    <td className="p-3 text-rojo border-b border-gray-300">{player.derrotas}</td>
-                    <td className={`p-3 border-b border-gray-300 font-bold ${player.winRate > 50 ? "text-verde" : "text-rojo"}`}>{player.winRate}</td>
-                    <td className="p-3 border-b border-gray-300">
-                      <div className="flex items-center gap-2 font-bold">
-                        <img src={`https://api.koryubudoficial.es/assets/rankIcons/${player.tier}.png`} className="w-12 h-9" />
-                        {capitalizeFirstLetter(player.tier)} {checkHighElo(player.tier, player.rank)}
-                        <span className="font-medium">({player.leaguePoints}LPs)</span>
-                      </div>
-                    </td>
-                    <td className="p-3 text-rojo border-b border-gray-300">
-                      <img src={`https://api.koryubudoficial.es/assets/teamIcons/${player.teamName}.png`} className="w-10 h-10" />
-                    </td>
-                  </motion.tr>
-                ))}
-              </AnimatePresence>
+              {sortedPlayers.map((player) => (
+                <motion.tr
+                  key={player.id}
+                  layout // Hace que el elemento se anime al cambiar de posición
+                  transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                  className="border-b border-gray-700"
+                >
+                  <td className="p-3 border-b border-r border-gray-300">{player.positionTable}</td>
+                  <td className="p-3 border-b border-gray-300">
+                    <UserBubble player={player} />
+                  </td>
+                  <td className="p-3 border-b border-gray-300">
+                    <UserRRSS player={player} type="twitter" />
+                  </td>
+                  <td className="p-3 border-b border-r border-gray-300">
+                    <UserRRSS player={player} type="twitch" />
+                  </td>
+                  <td className="p-3 border-b border-gray-300">{player.partidas}</td>
+                  <td className="p-3 text-verde border-b border-gray-300">{player.victorias}</td>
+                  <td className="p-3 text-rojo border-b border-gray-300">{player.derrotas}</td>
+                  <td className={`p-3 border-b border-gray-300 font-bold ${player.winRate > 50 ? "text-verde" : "text-rojo"}`}>{player.winRate}</td>
+                  <td className="p-3 border-b border-gray-300">
+                    <div className="flex items-center gap-2 font-bold">
+                      <img src={`https://api.koryubudoficial.es/assets/rankIcons/${player.tier}.png`} className="w-12 h-9" />
+                      {capitalizeFirstLetter(player.tier)} {checkHighElo(player.tier, player.rank)}
+                      <span className="font-medium">({player.leaguePoints}LPs)</span>
+                    </div>
+                  </td>
+                  <td className="p-3 text-rojo border-b border-gray-300">
+                    <img src={`https://api.koryubudoficial.es/assets/teamIcons/${player.teamName}.png`} className="w-10 h-10" />
+                  </td>
+                </motion.tr>
+              ))}
             </tbody>
           </table>
         )}
