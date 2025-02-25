@@ -7,15 +7,10 @@ import tailwindcss from "@tailwindcss/vite";
 
 import node from "@astrojs/node";
 
-import { GoogleAnalytics } from "astro-google-analytics";
-
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     react(),
-    GoogleAnalytics({
-      id: "G-N3DR1FF1CF",
-    }),
   ],
   server: {
     port: 7565,
