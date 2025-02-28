@@ -107,7 +107,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
   };
 
   return (
-    <div className="flex flex-col items-center overflow-x-auto rounded bg-[#2a2a2a] opacity-95">
+    <div className="flex flex-col items-center overflow-x-visible rounded bg-[#2a2a2a] opacity-95">
       <div className="flex flex-col md:w-full w-screen items-start justify-start p-4">
         <div className="flex md:flex-row flex-col w-full gap-4">
           <input

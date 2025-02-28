@@ -19,7 +19,7 @@ const RoleFilter: React.FC<RoleFilterProps> = ({ onFilterChange }) => {
     const roles = Object.entries(PlayerRole).map(([key, value]) => ({
       key,
       value,
-      image: `https://api.koryubudoficial.es/assets/roleIcons/${key}.png`
+      image: `https://api.koryubudoficial.es/assets/roleIcons/${key}.svg`
     }));
   
     const handleRoleSelect = (role: string) => {
@@ -39,7 +39,7 @@ const RoleFilter: React.FC<RoleFilterProps> = ({ onFilterChange }) => {
             <div className="flex items-center">
               <img 
                 src={`https://api.koryubudoficial.es/assets/roleIcons/${Object.keys(PlayerRole).find(key => 
-                  PlayerRole[key as keyof typeof PlayerRole] === selectedRole)}.png`}
+                  PlayerRole[key as keyof typeof PlayerRole] === selectedRole)}.svg`}
                 className="w-6 h-6 mr-2" 
                 alt={selectedRole}
               />

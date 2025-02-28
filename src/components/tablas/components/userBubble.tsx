@@ -17,7 +17,12 @@ const UserBubble: React.FC<UserBubbleProps> = ({ player }) => {
           <span className="text-[14px]">{player.username}</span>
         </a>
       </div>
-      <img src={`https://api.koryubudoficial.es/assets/roleIcons/${player.rol}.png`} alt="Rol" className="w-6 h-6" />
+      <img
+        src={`https://api.koryubudoficial.es/assets/roleIcons/${player.rol}.svg`}
+        alt="Rol"
+        className="w-6 h-6"
+        onError={(e) => (e.currentTarget.src = "https://api.koryubudoficial.es/assets/roleIcons/Fill.png")}
+      />
     </div>
   );
 };
