@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { Player } from "@/interfaces/PlayerInterface";
 import UserBubble from "./components/userBubble";
 import UserRRSS from "./components/userRRSS";
+import RoleFilter from "./components/roleFilter";
+import { PlayerRole } from "./components/roleFilter";
 import { motion } from "framer-motion";
 
 interface PlayerTableProps {
@@ -20,9 +22,15 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
   ]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTeam, setSearchTeam] = useState("");
+  const [searchRole, setSearchRole] = useState("");
 
   const filteredPlayers = players.filter(
-    (player) => player.username.toLowerCase().includes(searchTerm.toLowerCase()) && player.teamName.toLowerCase().includes(searchTeam.toLowerCase())
+    (player) =>
+      player.username.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      player.teamName.toLowerCase().includes(searchTeam.toLowerCase()) &&
+      (searchRole === "" ||
+        player.rol === searchRole ||
+        (typeof player.rol === "string" && Object.keys(PlayerRole).find((key) => PlayerRole[key as keyof typeof PlayerRole] === searchRole) === player.rol))
   );
 
   const sortedPlayers = [...filteredPlayers].sort((a, b) => {
@@ -116,6 +124,7 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
             onChange={(e) => setSearchTeam(e.target.value)}
             className="mb-4 p-3 rounded-lg bg-[#1f1f1f] text-white placeholder-gray-400 w-full focus:outline-none focus:ring-2 focus:ring-[#4a4a4a]"
           />
+          <RoleFilter onFilterChange={setSearchRole} />
         </div>
 
         {loading ? (
@@ -135,12 +144,12 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
                   <div className="flex justify-between items-center md:gap-0 gap-2"># {getSortArrow("positionTable")}</div>
                 </th>
                 <th className="p-3 border-b border-gray-300">PLAYER</th>
-                <th className="p-3 border-b border-gray-300 text-[16px]">
+                {/* <th className="p-3 border-b border-gray-300 text-[16px]">
                   <i className="fa-brands fa-x-twitter"></i>
                 </th>
                 <th className="p-3 border-b  border-r border-gray-300 text-[16px]">
                   <i className="fa-brands fa-twitch "></i>
-                </th>
+                </th> */}
                 <th className="p-3 cursor-pointer border-b border-gray-300" onClick={() => requestSort("partidas")}>
                   <div className="flex justify-between items-center md:gap-0 gap-2">PARTIDAS {getSortArrow("partidas")}</div>
                 </th>
@@ -170,15 +179,15 @@ const PlayerTable: React.FC<PlayerTableProps> = ({ players, loading }) => {
                   className="border-b border-gray-700"
                 >
                   <td className="p-3 border-b border-r border-gray-300">{player.positionTable}</td>
-                  <td className="p-3 border-b border-gray-300">
+                  <td className="p-3 border-b border-r border-gray-300">
                     <UserBubble player={player} />
                   </td>
-                  <td className="p-3 border-b border-gray-300">
+                  {/* <td className="p-3 border-b border-gray-300">
                     <UserRRSS player={player} type="twitter" />
                   </td>
                   <td className="p-3 border-b border-r border-gray-300">
                     <UserRRSS player={player} type="twitch" />
-                  </td>
+                  </td> */}
                   <td className="p-3 border-b border-gray-300">{player.partidas}</td>
                   <td className="p-3 text-verde border-b border-gray-300">{player.victorias}</td>
                   <td className="p-3 text-rojo border-b border-gray-300">{player.derrotas}</td>
