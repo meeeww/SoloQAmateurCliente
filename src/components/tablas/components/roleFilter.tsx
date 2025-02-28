@@ -19,7 +19,7 @@ const RoleFilter: React.FC<RoleFilterProps> = ({ onFilterChange }) => {
     const roles = Object.entries(PlayerRole).map(([key, value]) => ({
       key,
       value,
-      image: `https://api.koryubudoficial.es/assets/roleIcons/${key}.svg`
+      image: `https://api.koryubudoficial.es/assets/roleIcons/${value}.svg`
     }));
   
     const handleRoleSelect = (role: string) => {
